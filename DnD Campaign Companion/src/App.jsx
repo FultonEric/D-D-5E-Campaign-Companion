@@ -1,43 +1,41 @@
-import { useState } from "react";
-import { searchIndex, getEntity } from "./Api/DnDApi.js";
-import ResultsList from "./Components/ResultsList.Jsx";
+import { Outlet, Route, Routes } from "react-router-dom";
+import NavBar from "./Components/NavBar.jsx";
+import MusicPlayer from "./Components/MusicPlayer.jsx";
+import Home from "./Pages/Home.jsx";
+import Monsters from "./Pages/Monsters.jsx";
+import Spells from "./Pages/Spells.jsx";
+import Items from "./Pages/Items.jsx";
+import Notes from "./Pages/Notes.jsx";
+import Characters from "./Pages/Character.jsx";
+import Campaigns from "./Pages/Campaigns.jsx";
+import "./App.css";
 
-export default function SearchSection({ onAddToCampaign }) {
-  const [category, setCategory] = useState("monsters");
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const doSearch = async () => {
-    if (!query) return;
-    setLoading(true);
-    try {
-      const matches = await searchIndex(category, query);
-      // fetch details for top 10 results (optional)
-      const top = matches.slice(0, 10);
-      const details = await Promise.all(top.map(m => getEntity(category, m.index)));
-      setResults(details);
-    } catch (e) {
-      console.error(e);
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+function Layout() {
   return (
-    <section style={{ padding: "1rem 2rem" }}>
-      <div style={{ display:"flex", gap:8, marginBottom:8 }}>
-        <select value={category} onChange={e=>setCategory(e.target.value)}>
-          <option value="monsters">Monsters</option>
-          <option value="equipment">Items</option>
-          <option value="spells">Spells</option>
-          <option value="races">Races</option>
-        </select>
-        <input placeholder="Search e.g. goblin" value={query} onChange={e=>setQuery(e.target.value)} />
-        <button onClick={doSearch}>Search</button>
-      </div>
-      {loading ? <div>Loading...</div> : <ResultsList items={results} onAdd={onAddToCampaign} />}
-    </section>
+    <div className="app-shell">
+      <NavBar />
+      <MusicPlayer />
+      <main className="page-wrap">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/monsters" element={<Monsters />} />
+        <Route path="/spells" element={<Spells />} />
+        <Route path="/items" element={<Items />} />
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/character" element={<Characters />} />
+        <Route path="/campaigns" element={<Campaigns />} />
+        {/* 404 */}
+        <Route path="*" element={<Home />} />
+      </Route>
+    </Routes>
   );
 }

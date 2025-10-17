@@ -1,11 +1,152 @@
-/* Styles for the main app layout */
-main {
-  background-color: #ffffff;
-  border-left: 1px solid #e5e7eb;
+/* Shell */
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
-@media (max-width: 768px) {
-  .flex {
-    flex-direction: column;
-  }
+/* Nav */
+.nav-root {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 18px;
+  background: linear-gradient(180deg, #151419, rgba(21,20,25,0.6));
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
 }
+.nav-brand {
+  display: flex; gap: 10px; align-items: center;
+  font-family: "Cinzel", serif;
+  letter-spacing: 1px;
+  color: var(--gold);
+}
+.brand-glyph { filter: drop-shadow(0 0 6px rgba(202,168,107,.45)); }
+.nav-links { display: flex; gap: 14px; }
+.nav-link {
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: transform .07s ease, box-shadow .2s ease;
+}
+.nav-link.active, .nav-link:hover {
+  color: var(--gold);
+  box-shadow: var(--crimson-glow);
+  transform: translateY(-1px);
+}
+
+/* Page */
+.page-wrap { padding: 24px; }
+.page { max-width: 1100px; margin: 0 auto; }
+.page-title {
+  font-family: "Cinzel", serif;
+  color: var(--gold);
+  margin: 8px 0 16px;
+  text-shadow: 0 0 12px rgba(202,168,107,.25);
+}
+.lead { color: var(--muted); margin-bottom: 18px; }
+
+/* Grid + columns */
+.grid-2 {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+.columns { display: grid; grid-template-columns: 360px 1fr; gap: 16px; }
+@media (max-width: 900px) { .columns { grid-template-columns: 1fr; } }
+
+/* Cards */
+.card {
+  background: linear-gradient(180deg, #19181d, #141319);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+.card.muted { color: var(--muted); }
+
+/* Search */
+.searchbar {
+  display: flex; gap: 8px; margin-bottom: 14px;
+}
+.search-input {
+  flex: 1;
+  background: #121116;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 10px 12px;
+  border-radius: 10px;
+  outline: none;
+}
+.search-input:focus {
+  border-color: var(--crimson);
+  box-shadow: var(--crimson-glow);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+.btn-ghost:hover { box-shadow: var(--crimson-glow); }
+
+/* Results */
+.results-list {
+  list-style: none; padding: 0; margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+}
+.result-item { border-bottom: 1px solid var(--border); }
+.result-item:last-child { border-bottom: none; }
+.result-btn {
+  width: 100%; text-align: left;
+  padding: 10px 12px; background: #15141a; color: var(--ink);
+  border: none; cursor: pointer;
+}
+.result-btn:hover { background: #1c1b21; color: var(--gold); }
+
+/* Detail */
+.detail-card {
+  background: linear-gradient(180deg, #1b1a20, #141319);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+.detail-head {
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 10px;
+}
+.detail-body p { margin: 6px 0; }
+.muted { color: var(--muted); }
+
+/* Stat block flair */
+.ability-grid {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 12px 0;
+}
+.big-num {
+  font-family: "Cinzel", serif;
+  font-size: 20px;
+  padding: 6px 0;
+  color: var(--gold);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+/* Notes */
+.notes-area {
+  width: 100%; min-height: 55vh;
+  background: #131219;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+/* Campaigns */
+.campaign-list { list-style: none; padding: 0; margin-top: 12px; }
+.campaign-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px;
+  background: #15141a; margin-bottom: 8px;
+}
+
