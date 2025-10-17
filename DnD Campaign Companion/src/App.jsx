@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { searchIndex, getEntity } from "./Api/DnDApi.js";
-import ResultsList from "./Components/ResultsList.Jsx";
+import ResultsList from "./Components/ResultsList.jsx/index.js";
 
 export default function SearchSection({ onAddToCampaign }) {
   const [category, setCategory] = useState("monsters");
