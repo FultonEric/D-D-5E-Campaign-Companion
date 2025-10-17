@@ -1,0 +1,11 @@
+/* Styles for the main app layout */
+main {
+  background-color: #ffffff;
+  border-left: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+  }
+}
